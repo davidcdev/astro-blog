@@ -1,4 +1,20 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = "About Me";
+
+const identity = {
+  firstName: "David",
+  country: "Colombia",
+  occupation: "Full Stack Web Developer",
+  hobbies: ["music", "languages learning", "games"],
+};
+
+const skills = ["HTML", "CSS", "Tailwind CSS", "JavaScript", "React", "Astro", "Node JS", "Express"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
 ---
 
 <html lang="en">
@@ -7,15 +23,33 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>The New Dev</title>
-	</head>
+		<title>{pageTitle}</title>
+  </head>
 	<body>
-    <a href="/">Home</a>
-		<a href="/about/">About</a>
-    <a href="/blog/">Blog</a>
-
-		<h1>About</h1>
-    <p>This blog is a great resource for anyone looking to improve their web development skills. It offers informative and insightful articles to help you become a skilled developer, whether you're a pro or just starting out.</p>
-    <p>This blog is built with Astro.build and will update as I complete the tutorial. Check back to follow my progress!</p>
+    <BaseLayout pageTitle={pageTitle}>
+      
+      <p>This blog is a great resource for anyone looking to improve their web development skills. It offers informative and insightful articles to help you become a skilled developer, whether you're a pro or just starting out.</p>
+      
+      <p>This blog is built with Astro.build and will update as I complete the tutorial. Check back to follow my progress!</p>
+      
+      <p>Here are a few facts about me:</p>
+      <ul>
+        <li>My name is {identity.firstName}.</li>
+        <li>I live in {identity.country} and I work as a {identity.occupation}.</li>
+        {identity.hobbies.length >= 2 &&
+        <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+      }
+      </ul>
+      <p>My skills are:</p>
+      <ul>
+        {skills.map((skill) => <li class="skill">{skill}</li>)}
+      </ul>
+      
+      {happy && <p>I am happy to be learning Astro!</p>}
+      
+      {finished && <p>I finished this tutorial!</p>}
+      
+      {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
+    </BaseLayout>
 	</body>
 </html>
